@@ -1,0 +1,38 @@
+CREATE TABLE `testacount` (
+  `username` varchar(20) NOT NULL,
+  `money` double NOT NULL,
+  `date` double(32,0) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `user` (
+`id` int(11) not null,
+`username` varchar(20) not null,
+`password` varchar(20) not null,
+`birthday` date not null,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orders` (
+`id` int(11) not null,
+`ordertime` date  not null,
+`total` double not null,
+`uid` int(11) not null,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `roleName` varchar(50) DEFAULT NULL,
+  `roleDesc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `user_role` (
+  `userId` int(20) NOT NULL,
+  `roleId` bigint(20) NOT NULL,
+  PRIMARY KEY (`userId`,`roleId`),
+  KEY `roleId` (`roleId`),
+  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`roleId`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
